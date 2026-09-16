@@ -16,7 +16,7 @@
     exec = ./scripts/preview.nu;
     package = pkgs.nushell;
     binary = "nu";
-    packages = [ pkgs.live-server pkgs.watchexec ];
-    description = "Numbat Tree-sitter highlighting preview (live HTML)";
+    packages = [ pkgs.less ];
+    description = "Numbat Tree-sitter highlighting preview (paged in the terminal)";
   };
 }

@@ -9,9 +9,6 @@ node_modules/
 # Swift artifacts
 .build/
 
-# HTML highlighting preview output (scripts/preview.nu)
-.preview/
-
 # Go artifacts
 _obj/
 
