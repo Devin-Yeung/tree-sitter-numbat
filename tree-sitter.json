@@ -9,6 +9,7 @@
       "file-types": [
         "nbt"
       ],
+      "highlights": "queries/highlights.scm",
       "injection-regex": "^numbat$",
       "class-name": "TreeSitterNumbat"
     }
