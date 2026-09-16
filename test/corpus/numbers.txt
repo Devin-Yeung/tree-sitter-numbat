@@ -7,6 +7,16 @@ decimal integers
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (number
+        (decimal_number))))
+  (expression
+    (primary
+      (number
+        (decimal_number)))))
+
 ========================================================================
 integer separators
 ========================================================================
@@ -16,6 +26,20 @@ integer separators
 1_000
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (number
+        (decimal_number))))
+  (expression
+    (primary
+      (number
+        (decimal_number))))
+  (expression
+    (primary
+      (number
+        (decimal_number)))))
 
 ========================================================================
 decimal fractions
@@ -29,6 +53,28 @@ decimal fractions
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (number
+        (decimal_number))))
+  (expression
+    (primary
+      (number
+        (decimal_number))))
+  (expression
+    (primary
+      (number
+        (decimal_number))))
+  (expression
+    (primary
+      (number
+        (decimal_number))))
+  (expression
+    (primary
+      (number
+        (decimal_number)))))
+
 ========================================================================
 fraction separators
 ========================================================================
@@ -37,6 +83,16 @@ fraction separators
 1.000_001
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (number
+        (decimal_number))))
+  (expression
+    (primary
+      (number
+        (decimal_number)))))
 
 ========================================================================
 scientific notation
@@ -50,6 +106,28 @@ scientific notation
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (number
+        (decimal_number))))
+  (expression
+    (primary
+      (number
+        (decimal_number))))
+  (expression
+    (primary
+      (number
+        (decimal_number))))
+  (expression
+    (primary
+      (number
+        (decimal_number))))
+  (expression
+    (primary
+      (number
+        (decimal_number)))))
+
 ========================================================================
 scientific notation separators
 ========================================================================
@@ -57,6 +135,12 @@ scientific notation separators
 1e1_0_0
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (number
+        (decimal_number)))))
 
 ========================================================================
 hexadecimal integer
@@ -67,6 +151,16 @@ hexadecimal integer
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (number
+        (hex_number))))
+  (expression
+    (primary
+      (number
+        (hex_number)))))
+
 ========================================================================
 octal integer
 ========================================================================
@@ -75,6 +169,16 @@ octal integer
 0o377
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (number
+        (octal_number))))
+  (expression
+    (primary
+      (number
+        (octal_number)))))
 
 ========================================================================
 binary integer
@@ -85,6 +189,16 @@ binary integer
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (number
+        (binary_number))))
+  (expression
+    (primary
+      (number
+        (binary_number)))))
+
 ========================================================================
 not a number
 ========================================================================
@@ -93,6 +207,11 @@ NaN
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (nan))))
+
 ========================================================================
 infinity
 ========================================================================
@@ -100,6 +219,11 @@ infinity
 inf
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (inf))))
 
 ========================================================================
 unary signs on numbers
@@ -112,3 +236,31 @@ unary signs on numbers
 -0x3
 
 ---
+
+(source_file
+  (expression
+    (unary_expression
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (unary_expression
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (unary_expression
+      (unary_expression
+        (primary
+          (number
+            (decimal_number))))))
+  (expression
+    (unary_expression
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (unary_expression
+      (primary
+        (number
+          (hex_number))))))

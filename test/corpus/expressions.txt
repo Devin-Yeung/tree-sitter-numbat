@@ -6,6 +6,20 @@ addition and subtraction
 
 ---
 
+(source_file
+  (expression
+    (additive_expression
+      (additive_expression
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (number
+            (decimal_number))))
+      (primary
+        (number
+          (decimal_number))))))
+
 ========================================================================
 multiplication and division
 ========================================================================
@@ -13,6 +27,20 @@ multiplication and division
 1920 / 16 * 9
 
 ---
+
+(source_file
+  (expression
+    (multiplicative_expression
+      (multiplicative_expression
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (number
+            (decimal_number))))
+      (primary
+        (number
+          (decimal_number))))))
 
 ========================================================================
 unicode multiplication operators
@@ -24,6 +52,32 @@ unicode multiplication operators
 
 ---
 
+(source_file
+  (expression
+    (multiplicative_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (multiplicative_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (multiplicative_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number))))))
+
 ========================================================================
 unicode division operator
 ========================================================================
@@ -31,6 +85,16 @@ unicode division operator
 1920 ÷ 16
 
 ---
+
+(source_file
+  (expression
+    (multiplicative_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number))))))
 
 ========================================================================
 operator precedence
@@ -41,6 +105,32 @@ operator precedence
 
 ---
 
+(source_file
+  (expression
+    (additive_expression
+      (primary
+        (number
+          (decimal_number)))
+      (multiplicative_expression
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (number
+            (decimal_number))))))
+  (expression
+    (multiplicative_expression
+      (multiplicative_expression
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (number
+            (decimal_number))))
+      (primary
+        (number
+          (decimal_number))))))
+
 ========================================================================
 left associativity of subtraction
 ========================================================================
@@ -49,6 +139,20 @@ left associativity of subtraction
 
 ---
 
+(source_file
+  (expression
+    (additive_expression
+      (additive_expression
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (number
+            (decimal_number))))
+      (primary
+        (number
+          (decimal_number))))))
+
 ========================================================================
 left associativity of division
 ========================================================================
@@ -56,6 +160,20 @@ left associativity of division
 1 / 2 / 3
 
 ---
+
+(source_file
+  (expression
+    (multiplicative_expression
+      (multiplicative_expression
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (number
+            (decimal_number))))
+      (primary
+        (number
+          (decimal_number))))))
 
 ========================================================================
 unary plus and minus
@@ -68,6 +186,37 @@ unary plus and minus
 
 ---
 
+(source_file
+  (expression
+    (additive_expression
+      (unary_expression
+        (primary
+          (number
+            (decimal_number))))
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (unary_expression
+      (unary_expression
+        (primary
+          (number
+            (decimal_number))))))
+  (expression
+    (additive_expression
+      (unary_expression
+        (primary
+          (number
+            (decimal_number))))
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (unary_expression
+      (primary
+        (number
+          (decimal_number))))))
+
 ========================================================================
 exponentiation
 ========================================================================
@@ -77,6 +226,24 @@ exponentiation
 
 ---
 
+(source_file
+  (expression
+    (power_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (power_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number))))))
+
 ========================================================================
 right associative exponentiation
 ========================================================================
@@ -85,6 +252,20 @@ right associative exponentiation
 
 ---
 
+(source_file
+  (expression
+    (power_expression
+      (primary
+        (number
+          (decimal_number)))
+      (power_expression
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (number
+            (decimal_number)))))))
+
 ========================================================================
 negative exponent
 ========================================================================
@@ -92,6 +273,16 @@ negative exponent
 2^-3
 
 ---
+
+(source_file
+  (expression
+    (power_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number))))))
 
 ========================================================================
 unicode exponent
@@ -102,6 +293,24 @@ meter²
 s⁻¹
 
 ---
+
+(source_file
+  (expression
+    (unicode_power_expression
+      (primary
+        (number
+          (decimal_number)))
+      (unicode_exponent)))
+  (expression
+    (unicode_power_expression
+      (primary
+        (identifier))
+      (unicode_exponent)))
+  (expression
+    (unicode_power_expression
+      (primary
+        (identifier))
+      (unicode_exponent))))
 
 ========================================================================
 factorial
@@ -114,6 +323,33 @@ factorial
 
 ---
 
+(source_file
+  (expression
+    (factorial_expression
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (factorial_expression
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (factorial_expression
+      (factorial_expression
+        (primary
+          (number
+            (decimal_number))))))
+  (expression
+    (power_expression
+      (factorial_expression
+        (primary
+          (number
+            (decimal_number))))
+      (primary
+        (number
+          (decimal_number))))))
+
 ========================================================================
 implicit multiplication
 ========================================================================
@@ -124,6 +360,30 @@ implicit multiplication
 
 ---
 
+(source_file
+  (expression
+    (implicit_multiplication
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (identifier))))
+  (expression
+    (implicit_multiplication
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (implicit_multiplication
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (identifier)))))
+
 ========================================================================
 per keyword
 ========================================================================
@@ -133,6 +393,24 @@ meter per second
 
 ---
 
+(source_file
+  (expression
+    (per_expression
+      (primary
+        (identifier))
+      (primary
+        (identifier))))
+  (expression
+    (per_expression
+      (implicit_multiplication
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (identifier)))
+      (primary
+        (identifier)))))
+
 ========================================================================
 division binds tighter than per
 ========================================================================
@@ -140,6 +418,18 @@ division binds tighter than per
 1 / meter per second
 
 ---
+
+(source_file
+  (expression
+    (multiplicative_expression
+      (primary
+        (number
+          (decimal_number)))
+      (per_expression
+        (primary
+          (identifier))
+        (primary
+          (identifier))))))
 
 ========================================================================
 comparison operators
@@ -157,6 +447,80 @@ comparison operators
 
 ---
 
+(source_file
+  (expression
+    (comparison_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (comparison_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (comparison_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (comparison_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (comparison_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (comparison_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (comparison_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (comparison_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (comparison_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number))))))
+
 ========================================================================
 logical and
 ========================================================================
@@ -165,6 +529,14 @@ true && false
 
 ---
 
+(source_file
+  (expression
+    (logical_and_expression
+      (primary
+        (boolean))
+      (primary
+        (boolean)))))
+
 ========================================================================
 logical or
 ========================================================================
@@ -172,6 +544,14 @@ logical or
 true || false
 
 ---
+
+(source_file
+  (expression
+    (logical_or_expression
+      (primary
+        (boolean))
+      (primary
+        (boolean)))))
 
 ========================================================================
 logical negation
@@ -182,6 +562,21 @@ logical negation
 
 ---
 
+(source_file
+  (expression
+    (not_expression
+      (primary
+        (boolean))))
+  (expression
+    (not_expression
+      (call_expression
+        (primary
+          (identifier))
+        (argument_list
+          (expression
+            (primary
+              (identifier))))))))
+
 ========================================================================
 logical precedence
 ========================================================================
@@ -191,6 +586,24 @@ a && b || c
 
 ---
 
+(source_file
+  (expression
+    (logical_or_expression
+      (logical_and_expression
+        (primary
+          (identifier))
+        (primary
+          (identifier)))
+      (primary
+        (identifier))))
+  (expression
+    (logical_and_expression
+      (not_expression
+        (primary
+          (identifier)))
+      (primary
+        (identifier)))))
+
 ========================================================================
 unit conversion arrow
 ========================================================================
@@ -198,6 +611,18 @@ unit conversion arrow
 3 in -> cm
 
 ---
+
+(source_file
+  (expression
+    (conversion_expression
+      (implicit_multiplication
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (identifier)))
+      (primary
+        (identifier)))))
 
 ========================================================================
 unit conversion unicode arrows
@@ -208,6 +633,28 @@ unit conversion unicode arrows
 
 ---
 
+(source_file
+  (expression
+    (conversion_expression
+      (implicit_multiplication
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (identifier)))
+      (primary
+        (identifier))))
+  (expression
+    (conversion_expression
+      (implicit_multiplication
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (identifier)))
+      (primary
+        (identifier)))))
+
 ========================================================================
 unit conversion to keyword
 ========================================================================
@@ -215,6 +662,18 @@ unit conversion to keyword
 3 in to cm
 
 ---
+
+(source_file
+  (expression
+    (conversion_expression
+      (implicit_multiplication
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (identifier)))
+      (primary
+        (identifier)))))
 
 ========================================================================
 postfix apply
@@ -224,6 +683,14 @@ pi |> cos
 
 ---
 
+(source_file
+  (expression
+    (postfix_apply_expression
+      (primary
+        (identifier))
+      (primary
+        (identifier)))))
+
 ========================================================================
 postfix apply with low precedence
 ========================================================================
@@ -232,6 +699,21 @@ pi/3 + pi |> cos
 
 ---
 
+(source_file
+  (expression
+    (postfix_apply_expression
+      (additive_expression
+        (multiplicative_expression
+          (primary
+            (identifier))
+          (primary
+            (number
+              (decimal_number))))
+        (primary
+          (identifier)))
+      (primary
+        (identifier)))))
+
 ========================================================================
 chained postfix apply
 ========================================================================
@@ -239,6 +721,17 @@ chained postfix apply
 xs |> head |> str_length
 
 ---
+
+(source_file
+  (expression
+    (postfix_apply_expression
+      (postfix_apply_expression
+        (primary
+          (identifier))
+        (primary
+          (identifier)))
+      (primary
+        (identifier)))))
 
 ========================================================================
 parentheses
@@ -249,6 +742,38 @@ parentheses
 
 ---
 
+(source_file
+  (expression
+    (additive_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (parenthesized_expression
+          (expression
+            (additive_expression
+              (primary
+                (number
+                  (decimal_number)))
+              (primary
+                (number
+                  (decimal_number)))))))))
+  (expression
+    (power_expression
+      (primary
+        (parenthesized_expression
+          (expression
+            (power_expression
+              (primary
+                (number
+                  (decimal_number)))
+              (primary
+                (number
+                  (decimal_number)))))))
+      (primary
+        (number
+          (decimal_number))))))
+
 ========================================================================
 typed hole
 ========================================================================
@@ -256,6 +781,11 @@ typed hole
 ?
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (typed_hole))))
 
 ========================================================================
 last result identifiers
@@ -266,6 +796,14 @@ ans
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (identifier)))
+  (expression
+    (primary
+      (identifier))))
+
 ========================================================================
 field access
 ========================================================================
@@ -275,6 +813,23 @@ point.x + point.y
 
 ---
 
+(source_file
+  (expression
+    (field_access
+      (primary
+        (identifier))
+      (identifier)))
+  (expression
+    (additive_expression
+      (field_access
+        (primary
+          (identifier))
+        (identifier))
+      (field_access
+        (primary
+          (identifier))
+        (identifier)))))
+
 ========================================================================
 struct instantiation inside an expression
 ========================================================================
@@ -282,6 +837,26 @@ struct instantiation inside an expression
 print(Point { x: 1, y: 2 })
 
 ---
+
+(source_file
+  (procedure_call
+    (argument_list
+      (expression
+        (primary
+          (struct_instantiation
+            (identifier)
+            (struct_instantiation_field
+              (identifier)
+              (expression
+                (primary
+                  (number
+                    (decimal_number)))))
+            (struct_instantiation_field
+              (identifier)
+              (expression
+                (primary
+                  (number
+                    (decimal_number)))))))))))
 
 ========================================================================
 call chaining
@@ -291,6 +866,23 @@ foo(1)(2)
 
 ---
 
+(source_file
+  (expression
+    (call_expression
+      (call_expression
+        (primary
+          (identifier))
+        (argument_list
+          (expression
+            (primary
+              (number
+                (decimal_number))))))
+      (argument_list
+        (expression
+          (primary
+            (number
+              (decimal_number))))))))
+
 ========================================================================
 combined expression
 ========================================================================
@@ -298,6 +890,69 @@ combined expression
 sqrt((cos(U2) sinλ)² + (cos(U1) sin(U2) - sin(U1) cos(U2) cosλ)²)
 
 ---
+
+(source_file
+  (expression
+    (call_expression
+      (primary
+        (identifier))
+      (argument_list
+        (expression
+          (additive_expression
+            (unicode_power_expression
+              (primary
+                (parenthesized_expression
+                  (expression
+                    (implicit_multiplication
+                      (call_expression
+                        (primary
+                          (identifier))
+                        (argument_list
+                          (expression
+                            (primary
+                              (identifier)))))
+                      (primary
+                        (identifier))))))
+              (unicode_exponent))
+            (unicode_power_expression
+              (primary
+                (parenthesized_expression
+                  (expression
+                    (additive_expression
+                      (implicit_multiplication
+                        (call_expression
+                          (primary
+                            (identifier))
+                          (argument_list
+                            (expression
+                              (primary
+                                (identifier)))))
+                        (call_expression
+                          (primary
+                            (identifier))
+                          (argument_list
+                            (expression
+                              (primary
+                                (identifier))))))
+                      (implicit_multiplication
+                        (implicit_multiplication
+                          (call_expression
+                            (primary
+                              (identifier))
+                            (argument_list
+                              (expression
+                                (primary
+                                  (identifier)))))
+                          (call_expression
+                            (primary
+                              (identifier))
+                            (argument_list
+                              (expression
+                                (primary
+                                  (identifier))))))
+                        (primary
+                          (identifier)))))))
+              (unicode_exponent))))))))
 
 ========================================================================
 mixed precedence expression
@@ -307,3 +962,40 @@ b A_ × (σ - Δσ)
 1 + 2 × 3 ÷ 4 - 5
 
 ---
+
+(source_file
+  (expression
+    (multiplicative_expression
+      (implicit_multiplication
+        (primary
+          (identifier))
+        (primary
+          (identifier)))
+      (primary
+        (parenthesized_expression
+          (expression
+            (additive_expression
+              (primary
+                (identifier))
+              (primary
+                (identifier))))))))
+  (expression
+    (additive_expression
+      (additive_expression
+        (primary
+          (number
+            (decimal_number)))
+        (multiplicative_expression
+          (multiplicative_expression
+            (primary
+              (number
+                (decimal_number)))
+            (primary
+              (number
+                (decimal_number))))
+          (primary
+            (number
+              (decimal_number)))))
+      (primary
+        (number
+          (decimal_number))))))

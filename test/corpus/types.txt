@@ -6,6 +6,15 @@ let b: Bool = true
 
 ---
 
+(source_file
+  (variable_declaration
+    (identifier)
+    (type_annotation
+      (boolean_type))
+    (expression
+      (primary
+        (boolean)))))
+
 ========================================================================
 string type annotation
 ========================================================================
@@ -13,6 +22,17 @@ string type annotation
 let s: String = "hello"
 
 ---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (type_annotation
+      (string_type))
+    (expression
+      (primary
+        (string
+          (fixed_string
+            (string_content)))))))
 
 ========================================================================
 datetime type annotation
@@ -22,6 +42,17 @@ let d: DateTime = now()
 
 ---
 
+(source_file
+  (variable_declaration
+    (identifier)
+    (type_annotation
+      (datetime_type))
+    (expression
+      (call_expression
+        (primary
+          (identifier))
+        (argument_list)))))
+
 ========================================================================
 function type annotation
 ========================================================================
@@ -29,6 +60,27 @@ function type annotation
 let f: Fn[(Scalar) -> Scalar] = ?
 
 ---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (type_annotation
+      (function_type
+        (type_annotation
+          (dimension_expression
+            (dimension_factor
+              (dimension_power
+                (dimension_primary
+                  (identifier))))))
+        (type_annotation
+          (dimension_expression
+            (dimension_factor
+              (dimension_power
+                (dimension_primary
+                  (identifier))))))))
+    (expression
+      (primary
+        (typed_hole)))))
 
 ========================================================================
 function type annotation with two parameters
@@ -38,6 +90,33 @@ let f: Fn[(Scalar, Scalar) -> Scalar] = ?
 
 ---
 
+(source_file
+  (variable_declaration
+    (identifier)
+    (type_annotation
+      (function_type
+        (type_annotation
+          (dimension_expression
+            (dimension_factor
+              (dimension_power
+                (dimension_primary
+                  (identifier))))))
+        (type_annotation
+          (dimension_expression
+            (dimension_factor
+              (dimension_power
+                (dimension_primary
+                  (identifier))))))
+        (type_annotation
+          (dimension_expression
+            (dimension_factor
+              (dimension_power
+                (dimension_primary
+                  (identifier))))))))
+    (expression
+      (primary
+        (typed_hole)))))
+
 ========================================================================
 function type annotation with no parameters
 ========================================================================
@@ -45,6 +124,21 @@ function type annotation with no parameters
 let f: Fn[() -> Scalar] = ?
 
 ---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (type_annotation
+      (function_type
+        (type_annotation
+          (dimension_expression
+            (dimension_factor
+              (dimension_power
+                (dimension_primary
+                  (identifier))))))))
+    (expression
+      (primary
+        (typed_hole)))))
 
 ========================================================================
 list type annotation
@@ -54,6 +148,33 @@ let xs: List<Scalar> = [1, 2, 3]
 
 ---
 
+(source_file
+  (variable_declaration
+    (identifier)
+    (type_annotation
+      (list_type
+        (type_annotation
+          (dimension_expression
+            (dimension_factor
+              (dimension_power
+                (dimension_primary
+                  (identifier))))))))
+    (expression
+      (primary
+        (list
+          (expression
+            (primary
+              (number
+                (decimal_number))))
+          (expression
+            (primary
+              (number
+                (decimal_number))))
+          (expression
+            (primary
+              (number
+                (decimal_number)))))))))
+
 ========================================================================
 nested list type annotation
 ========================================================================
@@ -61,6 +182,23 @@ nested list type annotation
 let xs: List<List<Scalar>> = ?
 
 ---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (type_annotation
+      (list_type
+        (type_annotation
+          (list_type
+            (type_annotation
+              (dimension_expression
+                (dimension_factor
+                  (dimension_power
+                    (dimension_primary
+                      (identifier))))))))))
+    (expression
+      (primary
+        (typed_hole)))))
 
 ========================================================================
 dimension expression type annotation
@@ -70,6 +208,26 @@ let a: Length^2 / Time = ?
 
 ---
 
+(source_file
+  (variable_declaration
+    (identifier)
+    (type_annotation
+      (dimension_expression
+        (dimension_factor
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (identifier))
+              (dimension_exponent
+                (number
+                  (decimal_number)))))
+          (dimension_power
+            (dimension_primary
+              (identifier))))))
+    (expression
+      (primary
+        (typed_hole)))))
+
 ========================================================================
 generic type annotation
 ========================================================================
@@ -77,6 +235,26 @@ generic type annotation
 let v: Vec2<Length> = ?
 
 ---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (type_annotation
+      (dimension_expression
+        (dimension_factor
+          (dimension_power
+            (dimension_primary
+              (identifier)
+              (type_arguments
+                (type_annotation
+                  (dimension_expression
+                    (dimension_factor
+                      (dimension_power
+                        (dimension_primary
+                          (identifier))))))))))))
+    (expression
+      (primary
+        (typed_hole)))))
 
 ========================================================================
 complex dimension annotation
@@ -86,6 +264,26 @@ let q: Mass / Length^2 = ?
 
 ---
 
+(source_file
+  (variable_declaration
+    (identifier)
+    (type_annotation
+      (dimension_expression
+        (dimension_factor
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (identifier))))
+          (dimension_power
+            (dimension_primary
+              (identifier))
+            (dimension_exponent
+              (number
+                (decimal_number)))))))
+    (expression
+      (primary
+        (typed_hole)))))
+
 ========================================================================
 unity in type annotation
 ========================================================================
@@ -93,3 +291,21 @@ unity in type annotation
 let s: 1 / Time = ?
 
 ---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (type_annotation
+      (dimension_expression
+        (dimension_factor
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (number
+                  (decimal_number)))))
+          (dimension_power
+            (dimension_primary
+              (identifier))))))
+    (expression
+      (primary
+        (typed_hole)))))

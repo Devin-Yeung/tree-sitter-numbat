@@ -7,6 +7,10 @@ standalone comment
 
 ---
 
+(source_file
+  (comment)
+  (comment))
+
 ========================================================================
 trailing comment
 ========================================================================
@@ -14,6 +18,17 @@ trailing comment
 2 + 2 # trailing comment
 
 ---
+
+(source_file
+  (expression
+    (additive_expression
+      (primary
+        (number
+          (decimal_number)))
+      (primary
+        (number
+          (decimal_number)))))
+  (comment))
 
 ========================================================================
 comment between statements
@@ -25,6 +40,21 @@ let y = 2
 
 ---
 
+(source_file
+  (variable_declaration
+    (identifier)
+    (expression
+      (primary
+        (number
+          (decimal_number)))))
+  (comment)
+  (variable_declaration
+    (identifier)
+    (expression
+      (primary
+        (number
+          (decimal_number))))))
+
 ========================================================================
 comment at end of file
 ========================================================================
@@ -33,6 +63,13 @@ comment at end of file
 # no trailing newline after this comment
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (number
+        (decimal_number))))
+  (comment))
 
 ========================================================================
 comment inside function body
@@ -43,6 +80,21 @@ fn double(x) =
   2 x
 
 ---
+
+(source_file
+  (function_declaration
+    (identifier)
+    (parameter_list
+      (parameter
+        (identifier)))
+    (comment)
+    (expression
+      (implicit_multiplication
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (identifier))))))
 
 ========================================================================
 comment inside struct definition
@@ -55,3 +107,24 @@ struct Point {
 }
 
 ---
+
+(source_file
+  (struct_declaration
+    (identifier)
+    (comment)
+    (struct_field
+      (identifier)
+      (type_annotation
+        (dimension_expression
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (identifier)))))))
+    (struct_field
+      (identifier)
+      (type_annotation
+        (dimension_expression
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (identifier)))))))))

@@ -10,6 +10,30 @@ struct Element {
 
 ---
 
+(source_file
+  (struct_declaration
+    (identifier)
+    (struct_field
+      (identifier)
+      (type_annotation
+        (string_type)))
+    (struct_field
+      (identifier)
+      (type_annotation
+        (dimension_expression
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (identifier)))))))
+    (struct_field
+      (identifier)
+      (type_annotation
+        (dimension_expression
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (identifier)))))))))
+
 ========================================================================
 struct definition with trailing comma
 ========================================================================
@@ -21,6 +45,26 @@ struct Point {
 
 ---
 
+(source_file
+  (struct_declaration
+    (identifier)
+    (struct_field
+      (identifier)
+      (type_annotation
+        (dimension_expression
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (identifier)))))))
+    (struct_field
+      (identifier)
+      (type_annotation
+        (dimension_expression
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (identifier)))))))))
+
 ========================================================================
 generic struct definition
 ========================================================================
@@ -31,6 +75,30 @@ struct Vec2<D: Dim> {
 }
 
 ---
+
+(source_file
+  (struct_declaration
+    (identifier)
+    (type_parameters
+      (type_parameter
+        (identifier)
+        (identifier)))
+    (struct_field
+      (identifier)
+      (type_annotation
+        (dimension_expression
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (identifier)))))))
+    (struct_field
+      (identifier)
+      (type_annotation
+        (dimension_expression
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (identifier)))))))))
 
 ========================================================================
 struct instantiation
@@ -44,6 +112,39 @@ let hydrogen = Element {
 
 ---
 
+(source_file
+  (variable_declaration
+    (identifier)
+    (expression
+      (primary
+        (struct_instantiation
+          (identifier)
+          (struct_instantiation_field
+            (identifier)
+            (expression
+              (primary
+                (string
+                  (fixed_string
+                    (string_content))))))
+          (struct_instantiation_field
+            (identifier)
+            (expression
+              (primary
+                (number
+                  (decimal_number)))))
+          (struct_instantiation_field
+            (identifier)
+            (expression
+              (multiplicative_expression
+                (implicit_multiplication
+                  (primary
+                    (number
+                      (decimal_number)))
+                  (primary
+                    (identifier)))
+                (primary
+                  (identifier))))))))))
+
 ========================================================================
 struct instantiation without trailing comma
 ========================================================================
@@ -51,6 +152,24 @@ struct instantiation without trailing comma
 Point { x: 1, y: 2 }
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (struct_instantiation
+        (identifier)
+        (struct_instantiation_field
+          (identifier)
+          (expression
+            (primary
+              (number
+                (decimal_number)))))
+        (struct_instantiation_field
+          (identifier)
+          (expression
+            (primary
+              (number
+                (decimal_number)))))))))
 
 ========================================================================
 field access
@@ -60,6 +179,13 @@ hydrogen.density
 
 ---
 
+(source_file
+  (expression
+    (field_access
+      (primary
+        (identifier))
+      (identifier))))
+
 ========================================================================
 chained field access
 ========================================================================
@@ -68,6 +194,18 @@ p1.lon + p2.lon
 
 ---
 
+(source_file
+  (expression
+    (additive_expression
+      (field_access
+        (primary
+          (identifier))
+        (identifier))
+      (field_access
+        (primary
+          (identifier))
+        (identifier)))))
+
 ========================================================================
 field access in string interpolation
 ========================================================================
@@ -75,6 +213,28 @@ field access in string interpolation
 print("Distance {p1.name} - {p2.name}")
 
 ---
+
+(source_file
+  (procedure_call
+    (argument_list
+      (expression
+        (primary
+          (string
+            (interpolated_string
+              (string_content)
+              (interpolation
+                (expression
+                  (field_access
+                    (primary
+                      (identifier))
+                    (identifier))))
+              (string_content)
+              (interpolation
+                (expression
+                  (field_access
+                    (primary
+                      (identifier))
+                    (identifier)))))))))))
 
 ========================================================================
 struct with all supported field types
@@ -90,3 +250,53 @@ struct Everything {
 }
 
 ---
+
+(source_file
+  (struct_declaration
+    (identifier)
+    (struct_field
+      (identifier)
+      (type_annotation
+        (boolean_type)))
+    (struct_field
+      (identifier)
+      (type_annotation
+        (string_type)))
+    (struct_field
+      (identifier)
+      (type_annotation
+        (datetime_type)))
+    (struct_field
+      (identifier)
+      (type_annotation
+        (dimension_expression
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (identifier)))))))
+    (struct_field
+      (identifier)
+      (type_annotation
+        (list_type
+          (type_annotation
+            (dimension_expression
+              (dimension_factor
+                (dimension_power
+                  (dimension_primary
+                    (identifier)))))))))
+    (struct_field
+      (identifier)
+      (type_annotation
+        (function_type
+          (type_annotation
+            (dimension_expression
+              (dimension_factor
+                (dimension_power
+                  (dimension_primary
+                    (identifier))))))
+          (type_annotation
+            (dimension_expression
+              (dimension_factor
+                (dimension_power
+                  (dimension_primary
+                    (identifier)))))))))))

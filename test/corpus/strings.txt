@@ -6,6 +6,13 @@ fixed string
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (string
+        (fixed_string
+          (string_content))))))
+
 ========================================================================
 empty string
 ========================================================================
@@ -13,6 +20,12 @@ empty string
 ""
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (string
+        (fixed_string)))))
 
 ========================================================================
 string escapes
@@ -22,6 +35,13 @@ string escapes
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (string
+        (fixed_string
+          (string_content))))))
+
 ========================================================================
 single interpolation
 ========================================================================
@@ -29,6 +49,17 @@ single interpolation
 "value of pi = {pi}"
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (string
+        (interpolated_string
+          (string_content)
+          (interpolation
+            (expression
+              (primary
+                (identifier)))))))))
 
 ========================================================================
 multiple interpolations
@@ -38,6 +69,29 @@ multiple interpolations
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (string
+        (interpolated_string
+          (interpolation
+            (expression
+              (primary
+                (identifier))))
+          (string_content)
+          (interpolation
+            (expression
+              (primary
+                (identifier))))
+          (string_content)
+          (interpolation
+            (expression
+              (additive_expression
+                (primary
+                  (identifier))
+                (primary
+                  (identifier))))))))))
+
 ========================================================================
 interpolation with conversion
 ========================================================================
@@ -45,6 +99,27 @@ interpolation with conversion
 "speed: {30 km/h -> mph}"
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (string
+        (interpolated_string
+          (string_content)
+          (interpolation
+            (expression
+              (conversion_expression
+                (multiplicative_expression
+                  (implicit_multiplication
+                    (primary
+                      (number
+                        (decimal_number)))
+                    (primary
+                      (identifier)))
+                  (primary
+                    (identifier)))
+                (primary
+                  (identifier))))))))))
 
 ========================================================================
 interpolation with an expression
@@ -54,6 +129,23 @@ interpolation with an expression
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (string
+        (interpolated_string
+          (string_content)
+          (interpolation
+            (expression
+              (call_expression
+                (primary
+                  (identifier))
+                (argument_list
+                  (expression
+                    (primary
+                      (number
+                        (decimal_number)))))))))))))
+
 ========================================================================
 interpolation format specifiers
 ========================================================================
@@ -61,6 +153,18 @@ interpolation format specifiers
 "pi is approximately {pi:.3}"
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (string
+        (interpolated_string
+          (string_content)
+          (interpolation
+            (expression
+              (primary
+                (identifier)))
+            (format_specifier)))))))
 
 ========================================================================
 interpolation with conversion and format specifier
@@ -70,6 +174,21 @@ interpolation with conversion and format specifier
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (string
+        (interpolated_string
+          (string_content)
+          (interpolation
+            (expression
+              (conversion_expression
+                (primary
+                  (identifier))
+                (primary
+                  (identifier))))
+            (format_specifier)))))))
+
 ========================================================================
 escaped braces
 ========================================================================
@@ -78,6 +197,13 @@ escaped braces
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (string
+        (fixed_string
+          (string_content))))))
+
 ========================================================================
 interpolation containing a nested string
 ========================================================================
@@ -85,3 +211,25 @@ interpolation containing a nested string
 "{str_append("x", "y")}"
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (string
+        (interpolated_string
+          (interpolation
+            (expression
+              (call_expression
+                (primary
+                  (identifier))
+                (argument_list
+                  (expression
+                    (primary
+                      (string
+                        (fixed_string
+                          (string_content)))))
+                  (expression
+                    (primary
+                      (string
+                        (fixed_string
+                          (string_content))))))))))))))

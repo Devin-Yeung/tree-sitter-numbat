@@ -6,6 +6,11 @@ empty list
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (list))))
+
 ========================================================================
 integer list
 ========================================================================
@@ -13,6 +18,23 @@ integer list
 [1, 2, 3]
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (list
+        (expression
+          (primary
+            (number
+              (decimal_number))))
+        (expression
+          (primary
+            (number
+              (decimal_number))))
+        (expression
+          (primary
+            (number
+              (decimal_number))))))))
 
 ========================================================================
 single element list
@@ -22,6 +44,15 @@ single element list
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (list
+        (expression
+          (primary
+            (number
+              (decimal_number))))))))
+
 ========================================================================
 trailing comma
 ========================================================================
@@ -30,6 +61,23 @@ trailing comma
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (list
+        (expression
+          (primary
+            (number
+              (decimal_number))))
+        (expression
+          (primary
+            (number
+              (decimal_number))))
+        (expression
+          (primary
+            (number
+              (decimal_number))))))))
+
 ========================================================================
 nested list
 ========================================================================
@@ -37,6 +85,33 @@ nested list
 [[1, 2], [3, 4]]
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (list
+        (expression
+          (primary
+            (list
+              (expression
+                (primary
+                  (number
+                    (decimal_number))))
+              (expression
+                (primary
+                  (number
+                    (decimal_number)))))))
+        (expression
+          (primary
+            (list
+              (expression
+                (primary
+                  (number
+                    (decimal_number))))
+              (expression
+                (primary
+                  (number
+                    (decimal_number)))))))))))
 
 ========================================================================
 multiline list
@@ -50,6 +125,23 @@ multiline list
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (list
+        (expression
+          (primary
+            (number
+              (decimal_number))))
+        (expression
+          (primary
+            (number
+              (decimal_number))))
+        (expression
+          (primary
+            (number
+              (decimal_number))))))))
+
 ========================================================================
 list of quantities
 ========================================================================
@@ -57,6 +149,32 @@ list of quantities
 [1 m, 200 cm, 3 m]
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (list
+        (expression
+          (implicit_multiplication
+            (primary
+              (number
+                (decimal_number)))
+            (primary
+              (identifier))))
+        (expression
+          (implicit_multiplication
+            (primary
+              (number
+                (decimal_number)))
+            (primary
+              (identifier))))
+        (expression
+          (implicit_multiplication
+            (primary
+              (number
+                (decimal_number)))
+            (primary
+              (identifier))))))))
 
 ========================================================================
 list of strings
@@ -66,6 +184,26 @@ list of strings
 
 ---
 
+(source_file
+  (expression
+    (primary
+      (list
+        (expression
+          (primary
+            (string
+              (fixed_string
+                (string_content)))))
+        (expression
+          (primary
+            (string
+              (fixed_string
+                (string_content)))))
+        (expression
+          (primary
+            (string
+              (fixed_string
+                (string_content)))))))))
+
 ========================================================================
 list of booleans
 ========================================================================
@@ -73,3 +211,17 @@ list of booleans
 [true, false, true]
 
 ---
+
+(source_file
+  (expression
+    (primary
+      (list
+        (expression
+          (primary
+            (boolean)))
+        (expression
+          (primary
+            (boolean)))
+        (expression
+          (primary
+            (boolean)))))))

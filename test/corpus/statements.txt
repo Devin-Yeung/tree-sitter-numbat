@@ -6,6 +6,14 @@ let n = 4
 
 ---
 
+(source_file
+  (variable_declaration
+    (identifier)
+    (expression
+      (primary
+        (number
+          (decimal_number))))))
+
 ========================================================================
 constant with expression
 ========================================================================
@@ -13,6 +21,20 @@ constant with expression
 let q1 = 2 m/s
 
 ---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (expression
+      (multiplicative_expression
+        (implicit_multiplication
+          (primary
+            (number
+              (decimal_number)))
+          (primary
+            (identifier)))
+        (primary
+          (identifier))))))
 
 ========================================================================
 constant with type annotation
@@ -22,6 +44,26 @@ let q2: Velocity = 2 m/s
 
 ---
 
+(source_file
+  (variable_declaration
+    (identifier)
+    (type_annotation
+      (dimension_expression
+        (dimension_factor
+          (dimension_power
+            (dimension_primary
+              (identifier))))))
+    (expression
+      (multiplicative_expression
+        (implicit_multiplication
+          (primary
+            (number
+              (decimal_number)))
+          (primary
+            (identifier)))
+        (primary
+          (identifier))))))
+
 ========================================================================
 constant with complex type annotation
 ========================================================================
@@ -29,6 +71,30 @@ constant with complex type annotation
 let q3: Length / Time = 2 m/s
 
 ---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (type_annotation
+      (dimension_expression
+        (dimension_factor
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (identifier))))
+          (dimension_power
+            (dimension_primary
+              (identifier))))))
+    (expression
+      (multiplicative_expression
+        (implicit_multiplication
+          (primary
+            (number
+              (decimal_number)))
+          (primary
+            (identifier)))
+        (primary
+          (identifier))))))
 
 ========================================================================
 constant with unicode identifier
@@ -38,6 +104,14 @@ let ΔL = 3
 
 ---
 
+(source_file
+  (variable_declaration
+    (identifier)
+    (expression
+      (primary
+        (number
+          (decimal_number))))))
+
 ========================================================================
 base dimension declaration
 ========================================================================
@@ -45,6 +119,10 @@ base dimension declaration
 dimension Fame
 
 ---
+
+(source_file
+  (dimension_declaration
+    (identifier)))
 
 ========================================================================
 derived dimension declaration
@@ -54,6 +132,22 @@ dimension Deceleration = Length / Time^2
 
 ---
 
+(source_file
+  (dimension_declaration
+    (identifier)
+    (dimension_expression
+      (dimension_factor
+        (dimension_factor
+          (dimension_power
+            (dimension_primary
+              (identifier))))
+        (dimension_power
+          (dimension_primary
+            (identifier))
+          (dimension_exponent
+            (number
+              (decimal_number))))))))
+
 ========================================================================
 dimension with rational exponent
 ========================================================================
@@ -61,6 +155,22 @@ dimension with rational exponent
 dimension Jerk = Length / Time^3
 
 ---
+
+(source_file
+  (dimension_declaration
+    (identifier)
+    (dimension_expression
+      (dimension_factor
+        (dimension_factor
+          (dimension_power
+            (dimension_primary
+              (identifier))))
+        (dimension_power
+          (dimension_primary
+            (identifier))
+          (dimension_exponent
+            (number
+              (decimal_number))))))))
 
 ========================================================================
 base unit declaration
@@ -70,6 +180,10 @@ unit thing
 
 ---
 
+(source_file
+  (unit_declaration
+    (identifier)))
+
 ========================================================================
 base unit with dimension
 ========================================================================
@@ -77,6 +191,15 @@ base unit with dimension
 unit warhol: Fame
 
 ---
+
+(source_file
+  (unit_declaration
+    (identifier)
+    (dimension_expression
+      (dimension_factor
+        (dimension_power
+          (dimension_primary
+            (identifier)))))))
 
 ========================================================================
 derived unit declaration
@@ -86,6 +209,17 @@ unit quork = 0.35 meter
 
 ---
 
+(source_file
+  (unit_declaration
+    (identifier)
+    (expression
+      (implicit_multiplication
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (identifier))))))
+
 ========================================================================
 derived unit with type annotation
 ========================================================================
@@ -94,6 +228,22 @@ unit clonk: Time = 0.2 seconds
 
 ---
 
+(source_file
+  (unit_declaration
+    (identifier)
+    (dimension_expression
+      (dimension_factor
+        (dimension_power
+          (dimension_primary
+            (identifier)))))
+    (expression
+      (implicit_multiplication
+        (primary
+          (number
+            (decimal_number)))
+        (primary
+          (identifier))))))
+
 ========================================================================
 unit derived from an expression
 ========================================================================
@@ -101,6 +251,32 @@ unit derived from an expression
 unit BMI: Mass / Length^2 = kg / m^2
 
 ---
+
+(source_file
+  (unit_declaration
+    (identifier)
+    (dimension_expression
+      (dimension_factor
+        (dimension_factor
+          (dimension_power
+            (dimension_primary
+              (identifier))))
+        (dimension_power
+          (dimension_primary
+            (identifier))
+          (dimension_exponent
+            (number
+              (decimal_number))))))
+    (expression
+      (multiplicative_expression
+        (primary
+          (identifier))
+        (power_expression
+          (primary
+            (identifier))
+          (primary
+            (number
+              (decimal_number))))))))
 
 ========================================================================
 metric prefixes decorator
@@ -111,6 +287,25 @@ unit clonk: Time = 0.2 seconds
 
 ---
 
+(source_file
+  (decorated_statement
+    (decorator
+      (identifier))
+    (unit_declaration
+      (identifier)
+      (dimension_expression
+        (dimension_factor
+          (dimension_power
+            (dimension_primary
+              (identifier)))))
+      (expression
+        (implicit_multiplication
+          (primary
+            (number
+              (decimal_number)))
+          (primary
+            (identifier)))))))
+
 ========================================================================
 binary prefixes decorator
 ========================================================================
@@ -119,6 +314,17 @@ binary prefixes decorator
 unit flop = 1
 
 ---
+
+(source_file
+  (decorated_statement
+    (decorator
+      (identifier))
+    (unit_declaration
+      (identifier)
+      (expression
+        (primary
+          (number
+            (decimal_number)))))))
 
 ========================================================================
 abbreviation decorator
@@ -129,6 +335,13 @@ unit thing
 
 ---
 
+(source_file
+  (decorated_statement
+    (decorator
+      (identifier))
+    (unit_declaration
+      (identifier))))
+
 ========================================================================
 aliases decorator
 ========================================================================
@@ -137,6 +350,22 @@ aliases decorator
 unit quork = 0.35 meter
 
 ---
+
+(source_file
+  (decorated_statement
+    (decorator
+      (identifier)
+      (decorator_arguments
+        (identifier)))
+    (unit_declaration
+      (identifier)
+      (expression
+        (implicit_multiplication
+          (primary
+            (number
+              (decimal_number)))
+          (primary
+            (identifier)))))))
 
 ========================================================================
 aliases with prefix acceptance
@@ -147,6 +376,20 @@ unit warhol: Fame
 
 ---
 
+(source_file
+  (decorated_statement
+    (decorator
+      (identifier)
+      (decorator_arguments
+        (identifier)))
+    (unit_declaration
+      (identifier)
+      (dimension_expression
+        (dimension_factor
+          (dimension_power
+            (dimension_primary
+              (identifier))))))))
+
 ========================================================================
 multiple decorators
 ========================================================================
@@ -156,6 +399,22 @@ multiple decorators
 unit warhol: Fame
 
 ---
+
+(source_file
+  (decorated_statement
+    (decorator
+      (identifier))
+    (decorator
+      (identifier)
+      (decorator_arguments
+        (identifier)))
+    (unit_declaration
+      (identifier)
+      (dimension_expression
+        (dimension_factor
+          (dimension_power
+            (dimension_primary
+              (identifier))))))))
 
 ========================================================================
 documentation decorators
@@ -168,6 +427,36 @@ unit quork = 0.35 meter
 
 ---
 
+(source_file
+  (decorated_statement
+    (decorator
+      (identifier)
+      (decorator_arguments
+        (string
+          (fixed_string
+            (string_content)))))
+    (decorator
+      (identifier)
+      (decorator_arguments
+        (string
+          (fixed_string
+            (string_content)))))
+    (decorator
+      (identifier)
+      (decorator_arguments
+        (string
+          (fixed_string
+            (string_content)))))
+    (unit_declaration
+      (identifier)
+      (expression
+        (implicit_multiplication
+          (primary
+            (number
+              (decimal_number)))
+          (primary
+            (identifier)))))))
+
 ========================================================================
 example decorator
 ========================================================================
@@ -176,6 +465,39 @@ example decorator
 fn quork_value(x: Scalar) -> Scalar = 2 x
 
 ---
+
+(source_file
+  (decorated_statement
+    (decorator
+      (identifier)
+      (decorator_arguments
+        (string
+          (fixed_string
+            (string_content)))))
+    (function_declaration
+      (identifier)
+      (parameter_list
+        (parameter
+          (identifier)
+          (type_annotation
+            (dimension_expression
+              (dimension_factor
+                (dimension_power
+                  (dimension_primary
+                    (identifier))))))))
+      (type_annotation
+        (dimension_expression
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (identifier))))))
+      (expression
+        (implicit_multiplication
+          (primary
+            (number
+              (decimal_number)))
+          (primary
+            (identifier)))))))
 
 ========================================================================
 example decorator with description
@@ -186,6 +508,42 @@ fn quork_value(x: Scalar) -> Scalar = 2 x
 
 ---
 
+(source_file
+  (decorated_statement
+    (decorator
+      (identifier)
+      (decorator_arguments
+        (string
+          (fixed_string
+            (string_content)))
+        (string
+          (fixed_string
+            (string_content)))))
+    (function_declaration
+      (identifier)
+      (parameter_list
+        (parameter
+          (identifier)
+          (type_annotation
+            (dimension_expression
+              (dimension_factor
+                (dimension_power
+                  (dimension_primary
+                    (identifier))))))))
+      (type_annotation
+        (dimension_expression
+          (dimension_factor
+            (dimension_power
+              (dimension_primary
+                (identifier))))))
+      (expression
+        (implicit_multiplication
+          (primary
+            (number
+              (decimal_number)))
+          (primary
+            (identifier)))))))
+
 ========================================================================
 module import
 ========================================================================
@@ -193,6 +551,10 @@ module import
 use prelude
 
 ---
+
+(source_file
+  (module_import
+    (identifier)))
 
 ========================================================================
 module import with path
@@ -203,6 +565,14 @@ use numerics::fixed_point
 
 ---
 
+(source_file
+  (module_import
+    (identifier)
+    (identifier))
+  (module_import
+    (identifier)
+    (identifier)))
+
 ========================================================================
 definitions separated by semicolons
 ========================================================================
@@ -210,6 +580,26 @@ definitions separated by semicolons
 let x = 1; let y = 2; x + y
 
 ---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (expression
+      (primary
+        (number
+          (decimal_number)))))
+  (variable_declaration
+    (identifier)
+    (expression
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (additive_expression
+      (primary
+        (identifier))
+      (primary
+        (identifier)))))
 
 ========================================================================
 multiple statements separated by newlines
@@ -220,3 +610,23 @@ let y = 2
 x + y
 
 ---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (expression
+      (primary
+        (number
+          (decimal_number)))))
+  (variable_declaration
+    (identifier)
+    (expression
+      (primary
+        (number
+          (decimal_number)))))
+  (expression
+    (additive_expression
+      (primary
+        (identifier))
+      (primary
+        (identifier)))))
