@@ -5,7 +5,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tree-sitter/tree-sitter-numbat.git"
+    "url": "git+https://github.com/Devin-Yeung/tree-sitter-numbat.git"
   },
   "funding": "",
   "license": "MIT",
