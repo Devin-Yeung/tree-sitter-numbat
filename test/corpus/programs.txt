@@ -1,0 +1,154 @@
+========================================================================
+hello world
+========================================================================
+
+print("hello world")
+
+---
+
+========================================================================
+pendulum
+========================================================================
+
+fn oscillation_time(length: Length) -> Time =
+    2 pi × sqrt(length / g0)
+
+assert_eq(oscillation_time(30 cm), 1.1 s, 0.1 s)
+
+---
+
+========================================================================
+body mass index
+========================================================================
+
+# This script calculates the Body Mass Index (BMI) based on
+# the provided mass and height values.
+
+unit BMI: Mass / Length^2 = kg / m^2
+
+fn body_mass_index(mass: Mass, height: Length) =
+    mass / height² -> BMI
+
+print(body_mass_index(70 kg, 1.75 m))
+assert_eq(body_mass_index(70 kg, 1.75 m), 22.86 BMI, 0.01 BMI)
+
+---
+
+========================================================================
+generic square root
+========================================================================
+
+fn my_sqrt<D: Dim>(x: D^2) -> D = x^(1/2)
+
+let x: Length = my_sqrt(4 meter²)
+let y: Scalar = my_sqrt(100)
+
+assert_eq(x, 2 meter)
+
+---
+
+========================================================================
+stopping distance
+========================================================================
+
+let reaction_time: Time = 500 ms
+let braking_power: Acceleration = 0.8 × gravity
+
+fn stopping_distance(v: Velocity) -> Length =
+    v × reaction_time + ½ v² / braking_power
+
+assert_eq(stopping_distance(50 km/h), 19.2385 m, 0.001 m)
+
+---
+
+========================================================================
+binomial coefficient
+========================================================================
+
+# Binomial coefficient using Pascal's rule
+#
+# Adapted from the Python version here:
+# https://en.wikipedia.org/wiki/Binomial_coefficient
+
+fn binomial_coefficient(n: Scalar, k: Scalar) -> Scalar =
+    if k < 0 || k > n
+        then 0
+        else if k > n - k # Take advantage of symmetry
+            then binomial_coefficient(n, n - k)
+            else if k == 0 || n <= 1
+                then 1
+                else binomial_coefficient(n - 1, k) + binomial_coefficient(n - 1, k - 1)
+
+assert_eq(binomial_coefficient(10, 0), 1)
+assert_eq(binomial_coefficient(10, 1), 10)
+assert_eq(binomial_coefficient(10, 2), 45)
+assert_eq(binomial_coefficient(10, 6), 210)
+assert_eq(binomial_coefficient(10, 9), 10)
+assert_eq(binomial_coefficient(10, 10), 1)
+
+---
+
+========================================================================
+radioactive bananas
+========================================================================
+
+# Hot Banana
+#
+# I heard that bananas are radioactive. If they are radioactive, then
+# they radiate energy. How many bananas would you need to power a house?
+#
+# https://what-if.xkcd.com/158/
+
+# Bananas contain Potassium-40 with the following properties:
+
+let halflife: Time = 1.25 billion years
+let molar_mass: MolarMass = 40 g / mol
+
+# 40-K has a natural occcurence of
+
+let occurrence_40K = 0.0117%
+
+# We can now compute the radioactivity of natural potassium
+
+let decay_rate: Activity = ln(2) / halflife
+
+let radioactivity: Activity / Mass =
+    N_A × occurrence_40K × decay_rate / molar_mass -> Bq / g
+
+print("Radioactivity of potassium: {radioactivity}")
+
+# Next, we come to bananas
+
+@aliases(bananas)
+unit banana
+
+let potassium_per_banana = 451 mg / banana
+
+let radioactivity_banana: Activity / Banana =
+    potassium_per_banana × radioactivity -> Bq / banana
+
+print("Radioactivity of a banana: {radioactivity_banana}")
+
+# A single 40-K decay releases an energy of
+# (https://commons.wikimedia.org/wiki/File:Potassium-40-decay-scheme.svg)
+
+let energy_per_decay: Energy = 11% × 1.5 MeV + 89% × 1.3 MeV
+
+# Finally: how many bananas do we need to power a single household?
+
+let power_per_banana: Power / Banana =
+    radioactivity_banana × energy_per_decay -> pW / banana
+
+print("Power per banana: {power_per_banana}")
+
+unit household
+
+let power_consumption_household: Power / Household =
+    3000 kWh per household per year
+
+let bananas_per_household =
+    power_consumption_household / power_per_banana -> bananas / household
+
+print("Bananas per household: {bananas_per_household}")
+
+---

@@ -1,0 +1,164 @@
+========================================================================
+standard library quantities module
+========================================================================
+
+use core::scalar
+use core::error
+
+@description("Extract the plain value of a quantity (the `20` in `20 km/h`). This can be useful in generic code, but should generally be avoided otherwise.")
+@example("value_of(20 km/h)")
+fn value_of<T: Dim>(x: T) -> Scalar
+
+@description("Extract the unit of a quantity (the `km/h` in `20 km/h`). This can be useful in generic code, but should generally be avoided otherwise. Returns an error if the quantity is zero.")
+@example("unit_of(20 km/h)")
+fn unit_of<T: Dim>(x: T) -> T = if x_value == 0 then error("Invalid argument: cannot call `unit_of` on a value that evaluates to 0") else x / value_of(x)
+    where x_value = value_of(x)
+
+@description("Extract the base unit of a quantity without prefixes (e.g., `base_unit_of(5 km)` returns `m` instead of `km`). This can be useful for normalizing values. Returns an error if the quantity is zero.")
+@example("base_unit_of(5 km)")
+@example("5 km / base_unit_of(5 km)")
+fn base_unit_of<T: Dim>(x: T) -> T
+
+@description("Returns true if `quantity` has the same unit as `unit_query`, or if `quantity` evaluates to zero.")
+@example("has_unit(20 km/h, km/h)")
+@example("has_unit(20 km/h, m/s)")
+fn has_unit<T: Dim>(quantity: T, unit_query: T) -> Bool
+
+@description("Returns true if `quantity` is dimensionless, or if `quantity` is zero.")
+@example("is_dimensionless(10)")
+@example("is_dimensionless(10 km/h)")
+fn is_dimensionless<T: Dim>(quantity: T) -> Bool
+
+@description("Returns a string representation of the unit of `quantity`. Returns an empty string if `quantity` is dimensionless.")
+@example("unit_name(20)")
+@example("unit_name(20 m^2)")
+@example("unit_name(20 km/h)")
+fn unit_name<T: Dim>(quantity: T) -> String
+
+@description("Unsafe function that returns the quantity `from` unmodified with the target dimension `To`. This can be useful in generic code, but should generally be avoided otherwise.")
+@example("quantity_cast(1 nm, m)")
+fn quantity_cast<From: Dim, To: Dim>(f: From, t: To) -> To
+
+---
+
+========================================================================
+standard library time units module
+========================================================================
+
+use units::si
+
+@name("Week")
+@url("https://en.wikipedia.org/wiki/Week")
+@aliases(weeks)
+unit week: Time = 7 days
+
+# The mean tropical year changes over time (half a second per century).
+#
+# Values of the mean tropical year for the recent past and near future:
+#
+#   Year    Length (days)
+#   ---------------------
+#   2020    365.242 189 7
+#   2025    365.242 188 1
+#
+# For now, we use the 2025 value as a hardcoded constant.
+
+@name("Tropical year")
+@url("https://en.wikipedia.org/wiki/Tropical_year")
+@metric_prefixes
+@aliases(years, yr: short, tropical_year, tropical_years)
+unit year: Time = 365.242_188_1 days
+
+@name("Month")
+@url("https://en.wikipedia.org/wiki/Month")
+@aliases(months)
+unit month: Time = year / 12
+
+@name("Gregorian year")
+@url("https://en.wikipedia.org/wiki/Gregorian_year")
+@metric_prefixes
+@aliases(gregorian_years)
+unit gregorian_year: Time = 365.2425 days
+
+@name("Julian year")
+@url("https://en.wikipedia.org/wiki/Julian_year_(astronomy)")
+@aliases(julian_years)
+unit julian_year: Time = 365.25 days
+
+@name("Decade")
+@url("https://en.wikipedia.org/wiki/Decade")
+@aliases(decades)
+unit decade: Time = 10 years
+
+@name("Century")
+@url("https://en.wikipedia.org/wiki/Century")
+@aliases(centuries)
+unit century: Time = 100 years
+
+@name("Millennium")
+@url("https://en.wikipedia.org/wiki/Millennium")
+@aliases(millennia)
+unit millennium: Time = 1000 years
+
+---
+
+========================================================================
+prelude imports
+========================================================================
+
+use core::scalar
+use core::quantities
+use core::dimensions
+use core::functions
+use core::lists
+use core::strings
+use core::error
+use core::debug
+use core::random
+use core::numbers
+use core::mixed_units
+
+use math::constants
+use math::transcendental
+use math::trigonometry
+use math::trigonometry_extra
+use math::statistics
+use math::number_theory
+use math::distributions
+use math::geometry
+use math::percentage_calculations
+use math::combinatorics
+
+use units::si
+use units::time
+use units::astronomical
+use units::imperial
+use units::us_customary
+use units::nautical
+use units::cgs
+use units::planck
+use units::fff
+use units::misc
+use units::humorous
+use units::partsperx
+use units::mixed
+
+use units::currency
+use units::bit
+use units::placeholder
+
+use physics::constants
+use physics::temperature_conversion
+use physics::speed_of_sound
+
+use chemistry::elements
+
+use datetime::functions
+use datetime::unixtime
+use datetime::human
+use datetime::julian_date
+
+use plot::line_plot
+use plot::bar_chart
+
+---
